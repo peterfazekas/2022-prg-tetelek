@@ -1,1 +1,1 @@
-# 2022-prg-tetelek
+# Programozási tételek megvalósítása
