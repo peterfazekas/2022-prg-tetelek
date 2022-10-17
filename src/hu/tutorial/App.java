@@ -42,12 +42,18 @@ public class App {
         System.out.println();
     }
 
-    private static int summation() {
+/*    private static int summation() {
         int sum = 0;
         for (int i = 0; i < numbers.size(); i++) {
             sum += numbers.get(i);  // sum = sum + numbers[i];
         }
         return sum;
+    }
+*/
+    private static int summation() {
+        return numbers.stream()
+                .mapToInt(i -> i)
+                .sum();
     }
 
     private static boolean decision(int divisor) {
