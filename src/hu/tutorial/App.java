@@ -1,5 +1,8 @@
 package hu.tutorial;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -12,7 +15,8 @@ public class App {
 
     public static void main(String[] args) {
         System.out.println("Progrmozási tételek megvalósítása");
-        numbers = init();
+//        numbers = init();
+        numbers = convert(readFromFile("szamok.txt"));
         print(numbers);
         System.out.println("A sorozat összege: " + summation());
         int divisor = 3;
@@ -34,6 +38,24 @@ public class App {
         print(sortedList);
     }
 
+    /** Szomok beolvasása állományból
+     *
+     */
+    private static List<String> readFromFile(String filename) {
+        List<String> lines = new ArrayList<>();
+        try {
+            lines = Files.readAllLines(Path.of(filename));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return lines;
+    }
+
+    private static List<Integer> convert(List<String> lines) {
+        return lines.stream()
+                .map(Integer::parseInt)
+                .collect(Collectors.toList());
+    }
     /**
      * Inicializálás: A számok létrehozása
      * @return
@@ -168,7 +190,7 @@ public class App {
     }
 
     /**
-     * REndezés (egyszerű cserés)
+     * Rendezés (egyszerű cserés)
      * @param nums
      * @return
      */
