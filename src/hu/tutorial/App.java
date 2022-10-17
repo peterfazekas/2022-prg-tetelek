@@ -19,8 +19,8 @@ public class App {
         System.out.println("A sorozatban " + (isExist ? "van " : "nincs ") +
                 divisor + "-al osztható szám.");
         if (isExist) {
-            System.out.println("A sorozat " + (selection(divisor) + 1) +
-                    ". eleme osztható " + divisor + "-val.");
+            System.out.println("A sorozat " + selection(divisor) +
+                    " értékű eleme osztható " + divisor + "-val.");
         }
         List<Integer> sortedList = sort(numbers);
         print(sortedList);
@@ -56,22 +56,37 @@ public class App {
                 .sum();
     }
 
-    private static boolean decision(int divisor) {
+/*    private static boolean decision(int divisor) {
         int i = 0;
         while (i < numbers.size() && !(numbers.get(i) % divisor == 0)) {
             i++;
         }
         return i < numbers.size();
+    }*/
+
+    private static boolean decision(int divisor) {
+        return numbers.stream()
+                .anyMatch(i -> i % divisor == 0);
     }
 
-    private static int selection(int divisor) {
+/*    private static int selection(int divisor) {
         int i = 0;
         while (!(numbers.get(i) % divisor == 0)) {
             i++;
         }
         return i;
+    }*/
+
+    private static int selection(int divisor) {
+        return numbers.stream()
+                .filter(i -> i % divisor == 0)
+                .findFirst()
+                .get();
     }
 
+    private static String getText() {
+        return null;
+    }
 /*    private static void sort() {
         for (int i = 0; i < numbers.length -1; i++) {
             for (int j = i + 1; j < numbers.length; j++) {
